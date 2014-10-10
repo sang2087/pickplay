@@ -15,5 +15,9 @@ Platform.create(name:"iOS")
 Platform.create(name:"안드로이드")
 Platform.create(name:"PS2")
 
-game = Game.create(name: '스타크래프트', image: File.open("#{Rails.root}/seed_image/thumb/starcraft.jpg"), genre_ids: "1/2", platform_ids: "1/2")
-GameInfo.create(game_id: game.id, image: File.open("#{Rails.root}/seed_image/big/starcraft.jpg"), maker: "블리자드", distribute:"손오공", date:"1996.6.5", user_class:"12", movie:'<iframe width="420" height="315" src="//www.youtube.com/embed/28MeoIRFtUw" frameborder="0" allowfullscreen></iframe>', content: "스타 짱!")
+
+game = Game.create(name: '스타크래프트', image: File.open("#{Rails.root}/seed_image/thumb/starcraft.jpg"), genre_ids: "1/2")
+PlatformGame.create(game_id:game.id, platform_id: 1)
+PlatformGame.create(game_id:game.id, platform_id: 2)
+GameInfo.create(game_id: game.id, image: File.open("#{Rails.root}/seed_image/big/starcraft.jpg"), maker: "블리자드", distribute:"손오공", date:"1996.6.5", user_class:"12", content: "스타 짱!")
+GameMovie.create(game_id: game.id, movie_url: "//www.youtube.com/embed/28MeoIRFtUw")

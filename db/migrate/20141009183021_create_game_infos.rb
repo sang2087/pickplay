@@ -7,7 +7,6 @@ class CreateGameInfos < ActiveRecord::Migration
       t.string :distribute
       t.string :date
       t.string :user_class
-      t.string :movie
       t.text :content
 
       t.timestamps

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141010015840) do
+ActiveRecord::Schema.define(version: 20141010123138) do
 
   create_table "comments", force: true do |t|
     t.integer  "user_id"
@@ -31,8 +31,14 @@ ActiveRecord::Schema.define(version: 20141010015840) do
     t.string   "distribute"
     t.string   "date"
     t.string   "user_class"
-    t.string   "movie"
     t.text     "content"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "game_movies", force: true do |t|
+    t.integer  "game_id"
+    t.string   "movie_url"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -51,6 +57,20 @@ ActiveRecord::Schema.define(version: 20141010015840) do
 
   create_table "genres", force: true do |t|
     t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "platform_games", force: true do |t|
+    t.integer  "platform_id"
+    t.integer  "game_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "platform_users", force: true do |t|
+    t.integer  "platform_id"
+    t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -87,5 +107,12 @@ ActiveRecord::Schema.define(version: 20141010015840) do
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+
+  create_table "wishes", force: true do |t|
+    t.integer  "game_id"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
 end

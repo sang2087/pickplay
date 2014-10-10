@@ -4,6 +4,10 @@ class Game < ActiveRecord::Base
   has_one :game_info
   has_many :comments
   has_many :rating
+  has_many :wishes
+  has_many :game_movies
+  has_many :platform_games
+  has_many :platforms, :through => :platform_games
 
   def genre_names
     genres = self.genre_ids.split("/")
@@ -16,9 +20,8 @@ class Game < ActiveRecord::Base
   end
 
   def platform_names
-    platforms = self.platform_ids.split("/")
     names = Array.new
-    platforms.each do |platform|
+    self.platforms.each do |platform|
       names.push(Platform.find(platform).name)
     end
 
@@ -55,5 +58,20 @@ class Game < ActiveRecord::Base
       score = rating.score
     end
     score
+  end
+
+  def wish? user_id
+    wish = Wish.where(game_id:self.id, user_id: user_id).first
+    !wish.nil?
+  end
+
+  def self.get_platform_game user
+    platform_ids = user.platform_ids
+    platform_games = PlatformGame.where(:platform_id => platform_ids )
+    games = Array.new
+    platform_games.each do |p_g|
+      games.push(p_g.game)
+    end
+    games
   end
 end

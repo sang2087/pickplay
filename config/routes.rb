@@ -6,11 +6,14 @@ GameWatcha::Application.routes.draw do
   post "api/game_info"
   post "api/make_comment"
   post "api/set_rating"
+  post "api/wish"
   get "page/index"
+  get "my_wish" => "page#my_wish"
+  post "/api/delete_comment"
   root "page#index"
-  get "page/main"
+  post "/api/set_user_platform"
   get "main" => "page#main"
-  get "page/detail"
+  get "detail" => "page#detail"
   devise_for :users
   resources :games
 
