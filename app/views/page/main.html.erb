@@ -1,7 +1,44 @@
+<div class="platform-select">
+  <%Platform.all.each do |platform|%>
+    <%if current_user.platforms.include? platform%>
+      <input type="checkbox" class="platform-item" name="platform" value="<%=platform.id%>" checked><%=platform.name%>
+    <%else%>
+      <input type="checkbox" class="platform-item" name="platform" value="<%=platform.id%>"><%=platform.name%>
+    <%end%>
+  <%end%>
+</div>
 <div>
   <%@games.each do |game|%>
     <%=render :partial => "page/game_item", :locals => {game: game} %>
   <%end%>
 </div>
 <%=render :partial => "page/game_info_modal"%>
+
+<script type="text/javascript" charset="utf-8">
+  $(function(){
+      $(".platform-item").on("change",function(){
+        set_user_platform()
+      })
+  })
+
+  function set_user_platform() {
+    selected_platform = new Array
+    $(".platform-item:checked").each(function() {
+      selected_platform.push($(this).val());
+    });
+    $.ajax({
+      url: "/api/set_user_platform/",
+      dataType:"JSON",
+      type: "POST",
+      data: {
+        platform_ids: selected_platform
+      },
+      success: function(data) {
+        location.href = "/"
+      }
+    })
+  }
+</script>
+
+
 

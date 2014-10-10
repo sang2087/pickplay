@@ -1,0 +1,22 @@
+  <div class="game col-xs-3" game_id="<%=game.id%>">
+    <div onclick="game_info(<%=game.id%>)">
+      <div>
+        <img src="<%=game.image.url(:original)%>" alt="" style="width:100%" />
+      </div>
+      <div>
+        <%=game.name%>
+      </div>
+    </div>
+    <div>
+      <%if game.wish? current_user.id%>
+        <input type="button" onclick="wish(<%=game.id%>)" class="wish checked" value="찜됨" />
+      <%else%>
+        <input type="button" onclick="wish(<%=game.id%>)" class="wish" value="찜하기" />
+      <%end%>
+    </div>
+    <div>
+      <input type="number" class="rating" game_id="<%=game.id%>" value="<%= game.rate current_user.id %>" />
+      <input type="button" onclick="rating(<%=game.id%>)" value="평점 매기기" />
+    </div>
+  </div>
+

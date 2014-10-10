@@ -3,7 +3,7 @@ class Game < ActiveRecord::Base
   validates_attachment_content_type :image, :content_type => /\Aimage\/.*\Z/
   has_one :game_info
   has_many :comments
-  has_many :rating
+  has_many :ratings
   has_many :wishes
   has_many :game_movies
   has_many :platform_games

@@ -36,8 +36,9 @@ class ApiController < ApplicationController
     info = game.game_info.get_data
     comments = game.get_comment_data
     movies = game.game_movies
+    score = Game.find(params[:game_id]).rate current_user.id
 
-    render :json => [game, info, comments, movies]
+    render :json => [game, info, comments, movies, score]
   end
 
   def make_comment

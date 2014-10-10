@@ -1,14 +1,6 @@
 <h1>가지고 있는 플랫폼을 선택하세요</h1>
-<div class="platform-select">
-  <%Platform.all.each do |platform|%>
-    <%if current_user.platforms.include? platform%>
-      <input type="checkbox" class="platform-item" name="platform" value="<%=platform.id%>" checked><%=platform.name%>
-    <%else%>
-      <input type="checkbox" class="platform-item" name="platform" value="<%=platform.id%>"><%=platform.name%>
-    <%end%>
-  <%end%>
-  <input type="button" onclick="set_user_platform()" id="" value="" />
-</div>
+
+
 <script type="text/javascript" charset="utf-8">
   function set_user_platform() {
     selected_platform = new Array

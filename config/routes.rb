@@ -14,6 +14,7 @@ GameWatcha::Application.routes.draw do
   post "/api/set_user_platform"
   get "main" => "page#main"
   get "detail" => "page#detail"
+  get "select" => "page#select"
   devise_for :users
   resources :games
 

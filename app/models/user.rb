@@ -7,4 +7,5 @@ class User < ActiveRecord::Base
   has_many :wishes
   has_many :platform_users
   has_many :platforms, :through => :platform_users
+  has_many :ratings
 end

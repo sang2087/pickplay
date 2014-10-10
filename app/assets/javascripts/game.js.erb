@@ -1,0 +1,129 @@
+  var current_game_id = 0
+  $(function(){
+    $(".platform-item").on("change",function(){
+      selected_platform = new Array
+      $(".platform-item:checked").each(function() {
+        selected_platform.push($(this).val());
+      });
+
+      location.href = "?platform_ids="+selected_platform.join("+");
+    })
+  })
+
+  function game_info(game_id){
+    $.ajax({
+      url: "/api/game_info/",
+      dataType: "JSON",
+      type: "POST",
+      data: {
+        game_id: game_id
+      },
+      success: function(data) {
+        var game = data[0]
+        var info = data[1]
+        var comment = data[2]
+        var movie = data[3]
+        console.log(data)
+        current_game_id = game.id
+        $("#info_modal .name .info").text(game.name)
+        $("#info_modal .image .info").attr("src", info.image_url)
+        $("#info_modal .distribute .info").text(info.distribute)
+        $("#info_modal .platform .info").text(info.platform_name)
+        $("#info_modal .genre .info").text(info.genre_name)
+        $("#info_modal .date .info").text(info.date)
+        $("#info_modal .user_class .info").text(info.user_class)
+        $("#info_modal .maker .info").text(info.maker)
+        $("#info_modal .movie .info").html("")
+        for(var i=0;i<movie.length;i++){
+          $("#info_modal .movie .info").append(movie[i].movie_url)
+        }
+        $("#info_modal .content .info").text(info.content)
+        $("#info_modal .show-comment").html("")
+        $("#info_modal .send-comment").show()
+        for(var i=0;i<comment.length;i++){
+          add_comment(comment[i].email, comment[i].content, comment[i].score, true, comment[i].id)
+          if(comment[i].id == <%=current_user.id%>){
+            $("#info_modal .send-comment").hide()
+          }
+
+        }
+        $("#info_modal").modal("show")
+      }
+    })
+  }
+  function make_comment() {
+    var message = $(".send-comment .message").val()
+    $.ajax({
+      url: "/api/make_comment/",
+      dataType:"JSON",
+      type: "POST",
+      data: {
+        game_id: current_game_id,
+        message: message
+      },
+      success: function(data) {
+        var score = data[0]
+        var comment = data[1]
+        console.log(data)
+        add_comment("<%=current_user.email%>", message, score, true, comment.id)
+        $("#info_modal .send-comment").hide()
+      }
+    })
+  }
+  function add_comment(email, message, score, my_comment, comment_id) {
+    if(my_comment){
+      $(".show-comment").prepend("<div class='comment my-comment'>" + email + "(" + score + ") : " + message + "<span onclick='delete_comment("+comment_id+")'>x</span>");
+    }else{
+      $(".show-comment").prepend("<div>" + email + "(" + score + ") : " + message + "</div>");
+    }
+  }
+
+  function rating(game_id) {
+    var score = $(".rating[game_id="+game_id+"]").val()
+    $.ajax({
+      url: "/api/set_rating/",
+      dataType:"JSON",
+      type: "POST",
+      data: {
+        game_id:game_id,
+        score:score
+      },
+      success: function(data) {
+      }
+    })
+  }
+  function wish(game_id) {
+    $.ajax({
+      url: "/api/wish/",
+      dataType:"JSON",
+      type: "POST",
+      data: {
+        game_id:game_id
+      },
+      success: function(data) {
+        if(data){
+          // wish가 등록됨
+          $(".game[game_id="+game_id+"] .wish").val("찜됨")
+          $(".game[game_id="+game_id+"] .wish").addClass("checked")
+        }else{
+          $(".game[game_id="+game_id+"] .wish").val("찜하기")
+          $(".game[game_id="+game_id+"] .wish").removeClass("checked")
+        }
+      }
+    })
+  }
+  function delete_comment(comment_id) {
+    $.ajax({
+      url: "/api/delete_comment/",
+      dataType:"JSON",
+      type: "POST",
+      data: {
+        comment_id:comment_id
+      },
+      success: function(data) {
+        $("#info_modal .send-comment").show()
+        $("#info_modal .show-comment .my-comment").remove()
+      }
+    })
+  }
+

@@ -1,0 +1,8 @@
+<h1>찜한 게임</h1>
+<%@wishes.each do |wish|%>
+  <%=render :partial => "page/game_item", :locals => {game: wish.game} %>
+<%end%>
+<h1>평가한 게임</h1>
+<%@ratings.each do |rating|%>
+  <%=render :partial => "page/game_item", :locals => {game: rating.game} %>
+<%end%>
