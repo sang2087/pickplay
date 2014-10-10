@@ -49,6 +49,11 @@ class Game < ActiveRecord::Base
   end
 
   def rate user_id
-    Rating.where(game_id: self.id, user_id: user_id).first.score
+    rating = Rating.where(game_id: self.id, user_id: user_id).first
+    score = 0
+    unless rating.nil?
+      score = rating.score
+    end
+    score
   end
 end
