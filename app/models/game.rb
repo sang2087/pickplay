@@ -74,4 +74,34 @@ class Game < ActiveRecord::Base
     end
     games
   end
+  def self.data_from_seed seed
+    game = Game.new
+    #장르
+    game.genre_ids = Genre.set_genre_from_seed(seed[:genre])
+    game.image = File.open("#{Rails.root}/seed/image/small/#{seed[:small_image]}")
+    #게임 이름
+    game.name = seed[:name]
+    game.save
+    #제작사
+    game_info = GameInfo.new
+    game_info.game_id = game.id
+
+    game_info.maker = seed[:maker]
+
+    game_info.image = File.open("#{Rails.root}/seed/image/big/#{seed[:big_image]}")
+    #유통사
+    game_info.distribute = seed[:distribute]
+    #출시날짜
+    game_info.date = seed[:date]
+    #이용등급
+    game_info.user_class = seed[:user_class]
+    #소개
+    game_info.content = seed[:content]
+    game_info.save
+    #소개영상링크
+    GameMovie.create(game_id: game.id, movie_url: seed[:movie])
+    PlatformGame.set_platform_from_seed(seed[:platform], game.id)
+
+    
+  end
 end
