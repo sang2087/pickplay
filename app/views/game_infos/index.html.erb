@@ -1,0 +1,39 @@
+<h1>Listing game_infos</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Game</th>
+      <th>Maker</th>
+      <th>Distribute</th>
+      <th>Date</th>
+      <th>Class</th>
+      <th>Movie</th>
+      <th>Content</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @game_infos.each do |game_info| %>
+      <tr>
+        <td><%= game_info.game_id %></td>
+        <td><%= game_info.maker %></td>
+        <td><%= game_info.distribute %></td>
+        <td><%= game_info.date %></td>
+        <td><%= game_info.class %></td>
+        <td><%= game_info.movie %></td>
+        <td><%= game_info.content %></td>
+        <td><%= link_to 'Show', game_info %></td>
+        <td><%= link_to 'Edit', edit_game_info_path(game_info) %></td>
+        <td><%= link_to 'Destroy', game_info, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Game info', new_game_info_path %>

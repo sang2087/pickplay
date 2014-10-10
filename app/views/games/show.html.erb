@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @game.name %>
+</p>
+
+<p>
+  <strong>Image:</strong>
+  <img src="<%=@game.image.url(:midium)%>" alt="" />
+</p>
+
+<p>
+  <strong>Genre:</strong>
+  <%= @game.genre_id %>
+</p>
+
+<p>
+  <strong>platform ids:</strong>
+  <%= @game.platform_ids %>
+</p>
+
+<%= link_to 'Edit', edit_game_path(@game) %> |
+<%= link_to 'Back', games_path %>

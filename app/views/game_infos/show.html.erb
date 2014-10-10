@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Game:</strong>
+  <%= @game_info.game_id %>
+</p>
+
+<p>
+  <strong>Maker:</strong>
+  <%= @game_info.maker %>
+</p>
+
+<p>
+  <strong>Distribute:</strong>
+  <%= @game_info.distribute %>
+</p>
+
+<p>
+  <strong>Date:</strong>
+  <%= @game_info.date %>
+</p>
+
+<p>
+  <strong>Class:</strong>
+  <%= @game_info.class %>
+</p>
+
+<p>
+  <strong>Movie:</strong>
+  <%= @game_info.movie %>
+</p>
+
+<p>
+  <strong>Content:</strong>
+  <%= @game_info.content %>
+</p>
+
+<%= link_to 'Edit', edit_game_info_path(@game_info) %> |
+<%= link_to 'Back', game_infos_path %>
