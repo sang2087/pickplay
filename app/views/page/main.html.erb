@@ -139,6 +139,7 @@
       success: function(data) {
         var score = data[0]
         add_comment("<%=current_user.email%>", message, score)
+        $("#info_modal .send-comment").hide()
       }
     })
   }
