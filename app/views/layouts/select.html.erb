@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, width=device-width, height=device-height">
+  <title>PicPlay</title>
+  <%= stylesheet_link_tag    "application", media: "all"%>
+  <%= stylesheet_link_tag    "paper/loader", media: "all"%>
+  <%= stylesheet_link_tag    "paper/bootswatch", media: "all"%>
+  <%= javascript_include_tag "application"%>
+  <%= csrf_meta_tags %>
+</head>
+<body style="background-image: url('bg_img.jpg');background-repeat: no-repeat;background-size: cover;">
+  <%= yield %>
+
+</body>
+  <%=render :partial => "page/game_js"%>
+</html>

@@ -18,7 +18,7 @@ class PageController < ApplicationController
   end
 
   def main
-    @games = Game.get_platform_game current_user
+    @games = current_user.get_order_by_sd(Game.get_platform_game current_user)
   end
 
   def detail
@@ -29,7 +29,7 @@ class PageController < ApplicationController
     @ratings = current_user.ratings
   end
   def select
-    @games = Game.all.shuffle
+    @games = Game.all.shuffle[0..50]
   end
 
 
@@ -38,6 +38,9 @@ private
     case action_name
     when "index"
       "application"
+
+    when "select"
+      "select"
     else
       "main"
     end

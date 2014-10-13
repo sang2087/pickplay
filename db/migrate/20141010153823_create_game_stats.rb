@@ -1,6 +1,8 @@
 class CreateGameStats < ActiveRecord::Migration
   def change
     create_table :game_stats do |t|
+      t.integer :game_id
+      t.integer :stat0
       t.integer :stat0
       t.integer :stat1
       t.integer :stat2

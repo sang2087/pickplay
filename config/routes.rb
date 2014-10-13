@@ -8,7 +8,7 @@ GameWatcha::Application.routes.draw do
   post "api/set_rating"
   post "api/wish"
   get "page/index"
-  get "my_wish" => "page#my_wish"
+  get "picbox" => "page#my_wish"
   post "/api/delete_comment"
   root "page#index"
   post "/api/set_user_platform"

@@ -1,0 +1,127 @@
+<script type="text/javascript" charset="utf-8">
+  .star_div {
+   margin-left:20px;
+   margin-top:10px;
+   height:50px;
+}
+
+.star-rating {
+    margin: 0 auto;
+    display:inline-block;
+    margin-right:10px;
+}
+
+.rb0:checked ~ .rating,
+label.rb0l:hover ~ .rating
+{
+    width: 0px; 
+} 
+
+.rb1:checked ~ .rating,
+label.rb1l:hover ~ .rating
+{
+    width: 16px; 
+} 
+
+.rb2:checked ~ .rating,
+label.rb2l:hover ~ .rating
+{
+    width: 32px; 
+} 
+
+.rb3:checked ~ .rating,
+label.rb3l:hover ~ .rating
+{
+    width: 48px; 
+}
+
+.rb4:checked ~ .rating,
+label.rb4l:hover ~ .rating
+{
+    width: 64px; 
+}
+.rb5:checked ~ .rating,
+label.rb5l:hover ~ .rating
+{
+    width: 80px;
+}
+.rb6:checked ~ .rating,
+label.rb6l:hover ~ .rating
+{
+    width: 96px;
+}
+.rb7:checked ~ .rating,
+label.rb7l:hover ~ .rating
+{
+    width: 112px;
+}
+.rb8:checked ~ .rating,
+label.rb8l:hover ~ .rating
+{
+    width: 128px;
+}
+.rb9:checked ~ .rating,
+label.rb9l:hover ~ .rating
+{
+    width: 144px;
+}
+.rb10:checked ~ .rating,
+label.rb10l:hover ~ .rating
+{
+    width: 160px; /* 5 stars */
+}
+
+.star-rating label.star {
+    width: 16px; 
+    left: -16px; 
+    padding: 0;
+    height: 40px; 
+    position: relative;
+    z-index: 3;
+    float: left;
+}
+
+.star-rating label.star.last {
+    width: 32px;
+}
+
+
+.star-rating input[type=radio],
+.star-rating label.rb
+{
+    display: none;
+}
+
+.rating {
+    background: url(./full_n.png) repeat-x top left;
+    position: relative;
+    z-index: 2;
+    top: 4px; 
+    height: 32px; 
+    width:0px;
+}
+
+.rating-bg {
+    background: url(./epy_n.png) repeat-x top left;
+    position: relative;
+    z-index: 1;
+    top: -28px; 
+    height: 32px; 
+    width: 160px;
+}
+
+
+.ie8 .star-rating input,
+.ie8 .star-rating label.rb
+ {
+    display: inline-block;
+}
+
+.ie8 .rating,
+.ie8 .rating-bg,
+.ie8 .star-rating label.star {
+    display: none;
+}
+
+
+</script>

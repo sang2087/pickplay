@@ -37,8 +37,9 @@ class ApiController < ApplicationController
     comments = game.get_comment_data
     movies = game.game_movies
     score = Game.find(params[:game_id]).rate current_user.id
+    game_image_url = game.image.url(:original)
 
-    render :json => [game, info, comments, movies, score]
+    render :json => [game, info, comments, movies, score, game_image_url]
   end
 
   def make_comment
@@ -54,6 +55,7 @@ class ApiController < ApplicationController
 
   def set_rating
     Game.find(params[:game_id]).set_rate params[:score], current_user.id
+    current_user.set_stat #성능이 매우 느려질 수 있음
     render :json => true
   end
 
@@ -74,6 +76,12 @@ class ApiController < ApplicationController
   end
 
   def set_user_platform
+    if params[:platform_ids].nil?
+      platform_users = PlatformUser.where(:user_id => current_user.id)
+      platform_users.each do |platform_user|
+        platform_user.destroy
+      end
+    else
     platform_ids = params[:platform_ids]
     platform_users = PlatformUser.where(:user_id => current_user.id)
     platform_users.each do |platform_user|
@@ -82,6 +90,7 @@ class ApiController < ApplicationController
 
     platform_ids.each do |platform_id|
       PlatformUser.create(:platform_id=> platform_id, :user_id => current_user.id)
+    end
     end
     render :json => true
   end

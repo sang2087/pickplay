@@ -1,0 +1,223 @@
+<style type="text/css">
+  img {
+    display:block;
+  }
+  .line{
+    -webkit-box-shadow: inset 0px 0px 5px 0.03px rgba(255,255,255,1);
+    -moz-box-shadow: inset 0px 0px 5px 0.03px rgba(255,255,255,1);
+    box-shadow: inset 0px 0px 5px 0.03px rgba(255,255,255,1);
+    -webkit-box-shadow: 0px 0px 5px 0.03px rgba(255,255,255,1);
+    -moz-box-shadow: 0px 0px 5px 0.03px rgba(255,255,255,1);
+    box-shadow: 0px 0px 5px 0.03px rgba(255,255,255,1);
+  }
+  .input_box
+  {
+    padding: 12px; 
+    border: 1px solid #fff; 
+    background-color: rgba(0,0,0,0);
+    font-size: 15px;
+    width:206px;
+    color:white;
+
+    -webkit-box-shadow: 0px 0px 5px 1px rgba(255,255,255,1);
+    -moz-box-shadow: 0px 0px 5px 1px rgba(255,255,255,1);
+    box-shadow: 0px 0px 5px 1px rgba(255,255,255,1);
+  } 
+  .login_box:hover
+  {
+    src:url('./login.png');
+  }
+
+  .texi-button:hover 
+  {
+    border:2px solid #3498db;
+    color:#3498db;
+  }
+  .texi-button:active 
+  {
+    position:relative;top:1px;
+  }
+
+  html,body 
+  {
+    margin:0 ; 
+    padding:0 ; 
+    width:100% ; 
+    height:100% ; 
+    overflow:auto
+  } 
+  .login_box
+  {
+    width: 300px;
+    height: 395px;
+    background-color: #222222;
+    opacity:0.9;
+    -webkit-box-shadow: 9px 10px 13px 0px rgba(0,0,0,0.29);
+    -moz-box-shadow: 9px 10px 13px 0px rgba(0,0,0,0.29);
+    box-shadow: 9px 10px 13px 0px rgba(0,0,0,0.29);
+  }
+.flip {
+  -webkit-perspective: 800;
+}
+.flip .card.flipped {
+  -webkit-transform: rotatey(180deg);
+}
+.flip .card {
+  -webkit-transform-style: preserve-3d;
+  -webkit-transition: 0.5s;
+}
+.flip .card .face {
+  -webkit-backface-visibility: hidden ;
+}
+.flip .card .front {
+  position: absolute;
+  z-index: 1;
+}
+.flip .card .back {
+  -webkit-transform: rotatey(-180deg);
+}
+
+</style>
+  <center style="height:100%;">
+    <div id="floater" style="float:left; height:50%; margin-bottom:-200px;"></div>
+    <div id="contant" style="clear:both; height:400px; position:relative;width: 300px">
+      <div class="flip">
+        <div class="card"> 
+          <div class="face front"> 
+            <div class="login_box"><br/>
+              <img src="./logo.png" style="width:80px;">
+              <input style="margin-top:10px;margin-bottom:10px;" type="text" class="input_box" id="signin_email" placeholder="이메일 주소" value=""><br/>
+              <input type="password" class="input_box" placeholder="비밀번호" id="signin_password" value="" ><br/>
+              <img style="width:206px;height:auto;margin-top:10px;" src="./login_over.png" onmouseover="this.src='./login.png'" onmouseout="this.src='./login_over.png'">
+              <a style="color:white;font-size:12px;">아이디찾기 | 비밀번호 찾기</a>
+              <hr align="center" class="line" color="white" width="70%" style="display: inline-block;"><br/>
+              <img style="width:206px;height:auto;margin-top:10px;" src="./signin.png" onmouseover="this.src='./signin_over.png'" onmouseout="this.src='./signin.png'" id="signin_submit" value="로그인"  onclick="signin()">
+            </div>
+          </div> 
+          <div class="face back"> 
+            <div class="login_box"><br/>
+              <img src="./logo.png" style="width:80px;">
+              <input style="margin-top:10px;margin-bottom:10px;" type="text" class="input_box" id="signup_email" placeholder="이메일 주소" value=""><br/>
+              <input type="password" class="input_box" placeholder="비밀번호" id="signup_password" value="" ><br/>
+              <input type="password" class="input_box" placeholder="비밀번호" id="signup_password_confirm" value="" ><br/>
+              <img style="width:206px;height:auto;margin-top:10px;" src="./login_over.png" onmouseover="this.src='./login.png'" onmouseout="this.src='./login_over.png'">
+              <a style="color:white;font-size:12px;">아이디찾기 | 비밀번호 찾기</a>
+              <hr align="center" class="line" color="white" width="70%" style="display: inline-block;"><br/>
+              <img style="width:206px;height:auto;margin-top:10px;" src="./signin.png" onmouseover="this.src='./signin_over.png'" onmouseout="this.src='./signin.png'" id="signin_submit" value="로그인"  onclick="signin()">
+            </div>
+
+          </div> 
+        </div>
+      </div>
+    </div>
+  </center>
+<div>
+  <h1>회원가입</h1>
+  아이디 : <input type="text" id="signup_email" value="" />
+  비밀번호 : <input type="password" id="signup_password" value="" />
+  비밀번호 확인 : <input type="password" id="signup_password_confirm" value="" />
+  <input type="button" id="signup_submit" value="회원가입" onclick="signup()"/>
+</div>
+
+
+<script type="text/javascript" charset="utf-8">
+  $(function(){
+
+    $('.flip').click(function(){
+      $(this).find('.card').addClass('flipped').mouseleave(function(){
+          $(this).removeClass('flipped');
+        });
+        return false;
+    });
+
+    $("#signin_password").on("keyup",function(e){
+      if(e.keyCode == 13){
+        $("#signin_submit").click()
+      }
+    })
+    $("#signup_password_confirm").on("keyup",function(e){
+      if(e.keyCode == 13){
+        $("#signup_submit").click()
+      }
+    })
+  })
+
+  function signin() {
+    var email = $("#signin_email").val()
+    var password = $("#signin_password").val()
+    var check = check_sign_params(email, password)
+    if(!check.result){
+      alert(check.message)
+    }else{
+      $.ajax({
+        url: "/api/signin/",
+        dataType:"JSON",
+        type: "POST",
+        data: {
+          email: email,
+          password: password,
+        },
+        success: function(data) {
+          if(data){
+            location.reload()
+          }else{
+            alert("아이디 혹은 비밀번호를 틀렸습니다.")
+          }
+        }
+      })
+    }
+  }
+  function signup() {
+    var email = $("#signup_email").val()
+    var password = $("#signup_password").val()
+    var password_confirm = $("#signup_password_confirm").val()
+    var target = $("input[name='signup_target']:checked").val()
+    var check = check_sign_params(email, password, password_confirm)
+    if(!check.result){
+      alert(check.message)
+    }else{
+      $.ajax({
+        url: "/api/signup/",
+        dataType:"JSON",
+        type: "POST",
+        data: {
+          email: email,
+          password: password,
+          target: target
+        },
+        success: function(data) {
+          if(data.result){
+            location.reload()
+          }else{
+            alert(data.message)
+          }
+        }
+      })
+    }
+  }
+  function check_sign_params(email, password, password_confirm) {
+    if(password_confirm == null){
+      password_confirm = password
+    }
+    ret = new Object
+    ret.result = true
+    if(!validateEmail(email)){
+      ret.result = false
+      ret.message ="이메일을 잘못 입력하셨습니다."
+    }else if(password.length < 8){
+      ret.result = false
+      ret.message ="비밀번호의 길이가 짧습니다."
+    }else if(password != password_confirm){
+      ret.result = false
+      ret.message = "비밀번호와 비밀번호 재입력이 일치하지 않습니다."
+    }
+    return ret
+  }
+
+
+  function validateEmail(email) {
+      var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      return re.test(email);
+  }
+</script>
+

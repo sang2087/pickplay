@@ -14,4 +14,5 @@
 //= require jquery_ujs
 //= require paper/loader
 //= require paper/bootswatch
+//= require jquery.rateit.min
 

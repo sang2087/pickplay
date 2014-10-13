@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141010123138) do
+ActiveRecord::Schema.define(version: 20141010153823) do
 
   create_table "comments", force: true do |t|
     t.integer  "user_id"
@@ -39,6 +39,17 @@ ActiveRecord::Schema.define(version: 20141010123138) do
   create_table "game_movies", force: true do |t|
     t.integer  "game_id"
     t.string   "movie_url"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "game_stats", force: true do |t|
+    t.integer  "game_id"
+    t.integer  "stat0"
+    t.integer  "stat1"
+    t.integer  "stat2"
+    t.integer  "stat3"
+    t.integer  "stat4"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -85,6 +96,17 @@ ActiveRecord::Schema.define(version: 20141010123138) do
     t.integer  "user_id"
     t.integer  "game_id"
     t.integer  "score"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "user_stats", force: true do |t|
+    t.integer  "user_id"
+    t.float    "stat0"
+    t.float    "stat1"
+    t.float    "stat2"
+    t.float    "stat3"
+    t.float    "stat4"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

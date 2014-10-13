@@ -1,0 +1,5 @@
+  <%if current_user.platforms.include? platform%>
+    <input type="checkbox" class="platform-item" name="platform" value="<%=platform.id%>" checked><%=platform.name%>
+  <%else%>
+    <input type="checkbox" class="platform-item" name="platform" value="<%=platform.id%>"><%=platform.name%>
+  <%end%>

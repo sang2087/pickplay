@@ -1,66 +1,70 @@
 <div class="modal fade" id="info_modal" game_id="">
-  <div class="modal-dialog">
-    <div class="modal-content">
+  <div class="modal-dialog" style="width:1000px;background-color: #29292A">
+    <div class="modal-content" style="width:1000px;background-color: #29292A">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-        <div class="name">
-          <span class="info"></span>
-        </div>
       </div>
       <div class="modal-body">
-        <div class="image">
-          이미지
-          <img class="info" src="" style="width:100%" alt="" />
-        </div>
-        <div class="genre">
-          장르
-          <span class="info"></span>
-        </div>
-        <div class="platform">
-          플랫폼
-          <span class="info"></span>
-        </div>
-        <div class="maker">
-          제작사
-          <span class="info"></span>
-        </div>
-        <div class="distribute">
-          유통사
-          <span class="info"></span>
-        </div>
-        <div class="date">
-          날짜
-          <span class="info"></span>
-        </div>
-        <div class="user_class">
-          사용자 등급
-          <span class="info"></span>
-        </div>
-        <div class="movie">
-          영상
-          <span class="info"></span>
-        </div>
-        <div class="content">
-          소개
-          <span class="info"></span>
-        </div>
-        <div class="rating">
-          평가점수
-          <input type="number" class="info" game_id="" value="" />
-          <input type="button" onclick="modal_rating()" value="평점 매기기" />
-        </div>
+        <center>
+          <table style="width:950px">
+            <tr class="image">
+              <td>
+                <img class="info" src="" style="width:100%" alt="" />
+              </td>
+            </tr>
+
+            <tr><td class="name"style="padding:30px;padding-top:0px;"><br/><a style="color:white;font-size:35px;" class="info">게임이름</a>
+                <hr align="center" border="2" color="white"style="display: inline-block;width:100%;margin-bottom:20px;">
+                <div style="float:left;" class="small-image">
+                  <img src="" style="width:270px;" class="info">
+                </div>
+                <div style="float:left;margin-left:20px;"><br/>
+                  <span class="platform">
+                    <a style="color:yellow;font-size:21px;margin-rihgt:20px;">플랫폼</a>&nbsp; &nbsp; &nbsp; &nbsp;<a style="color:gray;font-size:21px;" class="info">IOS</a> <br/>
+                  </span>
+                  <span class="genre">
+                    <a style="color:yellow;font-size:21px;margin-rihgt:20px;">장르</a>&nbsp; &nbsp; &nbsp; &nbsp;<a style="color:gray;font-size:21px;" class="info"></a><br/>
+                  </span>
+                  <span class="maker">
+                    <a style="color:yellow;font-size:21px;margin-rihgt:20px;">제작사</a>&nbsp; &nbsp; &nbsp; &nbsp;<a style="color:gray;font-size:21px;" class="info"></a><br/>
+                  </span>
+                  <span class="distribute">
+                    <a style="color:yellow;font-size:21px;margin-rihgt:20px;">유통사</a>&nbsp; &nbsp; &nbsp; &nbsp;<a style="color:gray;font-size:21px;" class="info"></a><br/>
+                  </span>
+                  <span class="date">
+                    <a style="color:yellow;font-size:21px;margin-rihgt:20px;">제조일</a>&nbsp; &nbsp; &nbsp; &nbsp;<a style="color:gray;font-size:21px;" class="info">2014.01.01</a><br/>
+                  </span>
+                  <span class="user_class">
+                    <a style="color:yellow;font-size:21px;margin-rihgt:20px;">사용등급</a>&nbsp; &nbsp; &nbsp; &nbsp;<a style="color:gray;font-size:21px;" class="info">2014.01.01</a>
+                  </span>
+                </div>
+                <tr>
+                  <td style="padding-right:30px;padding-left:30px;" class="content">
+                    <a style="color:yellow;font-size:21px;margin-rihgt:20px;">설명</a><br/>
+                    <textarea class="info" style="color:gray;font-size:21px;width:100%;height:150px;"></textarea>
+                  </td>
+                </tr>
+            </td></tr>
+            <tr><td style="padding:30px;"><a style="color:yellow;font-size:21px;margin-rihgt:24px;">관련 동영상</a><a style="color:gray;font-size:18px;float:right;">더보기</a>
+              <hr align="center" border="2" color="white"style="display: inline-block;width:100%;margin-bottom:20px;">
+              <span class="movie">
+                <span class="info"></span>
+              </div>
+            </tr>
+        <tr><td style="padding:30px;"><a style="color:yellow;font-size:21px;margin-rihgt:24px;">평점</a><a style="color:gray;font-size:18px;float:right;">더보기</a>
+            <hr align="center" border="2" color="white"style="display: inline-block;width:100%;margin-bottom:20px;">
+              <div class="comment">
+                <div class="send-comment">
+                  <input type="text" class="message" value="" style="width:750px;height:40px" />
+                  <input type="button" class="btn btn-default send-comment" onclick="make_comment()" value="의견 남기기" />
+                </div>
+                <div class="show-comment">
+                </div>
+              </div>
+          </td></tr>
+          </table>
+        </center>
       </div>
-      <div class="modal-footer">
-        <div class="comment">
-          <div class="show-comment">
-          </div>
-          <div class="send-comment">
-            <input type="text" class="message" value="" />
-            <input type="button" class="send-comment" onclick="make_comment()" value="" />
-          </div>
-        </div>
-      </div>
-      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->

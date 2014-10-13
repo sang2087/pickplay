@@ -8,6 +8,7 @@ class Game < ActiveRecord::Base
   has_many :game_movies
   has_many :platform_games
   has_many :platforms, :through => :platform_games
+  has_one :game_stat
 
   def genre_names
     genres = self.genre_ids.split("/")
@@ -67,18 +68,19 @@ class Game < ActiveRecord::Base
 
   def self.get_platform_game user
     platform_ids = user.platform_ids
-    platform_games = PlatformGame.where(:platform_id => platform_ids )
+    platform_games = PlatformGame.where(:platform_id => platform_ids)
+
     games = Array.new
     platform_games.each do |p_g|
       games.push(p_g.game)
     end
-    games
+    games.uniq
   end
   def self.data_from_seed seed
     game = Game.new
     #장르
     game.genre_ids = Genre.set_genre_from_seed(seed[:genre])
-    game.image = File.open("#{Rails.root}/seed/image/small/#{seed[:small_image]}")
+    game.image = File.open("#{Rails.root}/seed/image#{seed[:small_image]}")
     #게임 이름
     game.name = seed[:name]
     game.save
@@ -88,7 +90,7 @@ class Game < ActiveRecord::Base
 
     game_info.maker = seed[:maker]
 
-    game_info.image = File.open("#{Rails.root}/seed/image/big/#{seed[:big_image]}")
+    game_info.image = File.open("#{Rails.root}/seed/image#{seed[:big_image]}")
     #유통사
     game_info.distribute = seed[:distribute]
     #출시날짜
@@ -101,7 +103,15 @@ class Game < ActiveRecord::Base
     #소개영상링크
     GameMovie.create(game_id: game.id, movie_url: seed[:movie])
     PlatformGame.set_platform_from_seed(seed[:platform], game.id)
-
-    
+    if game.game_stat.nil?
+      GameStat.create(game_id:game.id)
+    end
+    game_stat = GameStat.where(game_id: game.id).first
+    game_stat.stat0 = seed[:stat0]
+    game_stat.stat1 = seed[:stat1]
+    game_stat.stat2 = seed[:stat2]
+    game_stat.stat3 = seed[:stat3]
+    game_stat.stat4 = seed[:stat4]
+    game_stat.save
   end
 end

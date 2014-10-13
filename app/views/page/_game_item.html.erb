@@ -1,22 +1,52 @@
-  <div class="game col-xs-3" game_id="<%=game.id%>">
-    <div onclick="game_info(<%=game.id%>)">
-      <div>
-        <img src="<%=game.image.url(:original)%>" alt="" style="width:100%" />
+<div class="movie_box" game_id="<%=game.id%>">
+  <div class="square-box" style="background-image: url(<%=game.image.url(:original)%>); background-repeat:no-repeat; background-size:cover; background-position:center;">
+
+    <%if opt==""%>
+      <div class="score">
+        <%=score%>
       </div>
-      <div>
-        <%=game.name%>
+    <%end%>
+    <%if game.rate(current_user.id)==0 %>
+      <div align="center" class="square-content">
+    <%else%>
+      <div align="center" class="square-content fix">
+    <%end%>
+      <div class="star_div">
+        <div class="star-rating" style="width:180px;" game_id="<%=game.id%>">
+          <%0.upto(10).each do |i|%>
+            <%if game.rate(current_user.id) == i %>
+              <input class="rb<%=i%>" id="<%=opt%>Ans_<%=i+1%>_<%=game.id%>" name="<%=opt%>numericRating<%=game.id%>" type="radio" value="<%=i%>" checked="checked"/>
+            <%else%>
+              <input class="rb<%=i%>" id="<%=opt%>Ans_<%=i+1%>_<%=game.id%>" name="<%=opt%>numericRating<%=game.id%>" type="radio" value="<%=i%>" />
+            <%end%>
+          <%end%>
+          <%0.upto(10).each do |i|%>
+            <label for="<%=opt%>Ans_<%=i+1%>_<%=game.id%>" class="star rb<%=i%>l" value="<%=i%>" onclick=""></label>
+          <%end%>
+
+          <%0.upto(10).each do |i|%>
+            <label for="<%=opt%>Ans_<%=i+1%>_<%=game.id%>" class="rb" onclick=""><%=i%></label>
+          <%end%>
+          <div class="rating"></div>
+          <div class="rating-bg"></div> 
+        </div>
       </div>
+        <div style="float:left;cursor:pointer">
+            <img src="./detail.png" alt="" onclick="game_info(<%=game.id%>)" style="height:40px;margin-left:19px;"/>
+        </div>
+        <div style="width:100px;text-align:center;float:left;cursor:pointer">
+          <%if game.wish? current_user.id%>
+            <img src="./picked.png" alt="" onclick="wish(<%=game.id%>)" class="wish checked" style="height:37px;"/>
+          <%else%>
+            <img src="./pick.png" alt="" onclick="wish(<%=game.id%>)" class="wish"  style="height:42px;"/>
+          <%end%>
+        </div>
     </div>
-    <div>
-      <%if game.wish? current_user.id%>
-        <input type="button" onclick="wish(<%=game.id%>)" class="wish checked" value="찜됨" />
-      <%else%>
-        <input type="button" onclick="wish(<%=game.id%>)" class="wish" value="찜하기" />
-      <%end%>
-    </div>
-    <div>
-      <input type="number" class="rating" game_id="<%=game.id%>" value="<%= game.rate current_user.id %>" />
-      <input type="button" onclick="rating(<%=game.id%>)" value="평점 매기기" />
-    </div>
-  </div>
+  </div><br/>
+  <a style="color:white;font-size:17px;"><%=game.name[0..12]%>
+  <%if game.name.length>12%>
+    ...
+  <%end%>
+</a>
+</div>
 

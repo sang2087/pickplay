@@ -1,25 +1,356 @@
-<div class="modal fade">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-        <h4 class="modal-title">했던 게임 평가</h4>
+<style type="text/css">
+.star_div {
+   margin-left:20px;
+   margin-top:32px;
+}
+
+.star-rating {
+    margin: 0 auto;
+    display:inline-block;
+    margin-right:10px;
+}
+
+.rb0:checked ~ .rating,
+label.rb0l:hover ~ .rating
+{
+    width: 0px; 
+} 
+
+.rb1:checked ~ .rating,
+label.rb1l:hover ~ .rating
+{
+    width: 16px; 
+} 
+
+.rb2:checked ~ .rating,
+label.rb2l:hover ~ .rating
+{
+    width: 32px; 
+} 
+
+.rb3:checked ~ .rating,
+label.rb3l:hover ~ .rating
+{
+    width: 48px; 
+}
+
+.rb4:checked ~ .rating,
+label.rb4l:hover ~ .rating
+{
+    width: 64px; 
+}
+.rb5:checked ~ .rating,
+label.rb5l:hover ~ .rating
+{
+    width: 80px;
+}
+.rb6:checked ~ .rating,
+label.rb6l:hover ~ .rating
+{
+    width: 96px;
+}
+.rb7:checked ~ .rating,
+label.rb7l:hover ~ .rating
+{
+    width: 112px;
+}
+.rb8:checked ~ .rating,
+label.rb8l:hover ~ .rating
+{
+    width: 128px;
+}
+.rb9:checked ~ .rating,
+label.rb9l:hover ~ .rating
+{
+    width: 144px;
+}
+.rb10:checked ~ .rating,
+label.rb10l:hover ~ .rating
+{
+    width: 160px; /* 5 stars */
+}
+
+.star-rating label.star {
+    width: 16px; 
+    left: -16px; 
+    padding: 0;
+    height: 40px; 
+    position: relative;
+    z-index: 3;
+    float: left;
+}
+
+.star-rating label.star.last {
+    width: 32px;
+}
+
+
+.star-rating input[type=radio],
+.star-rating label.rb
+{
+    display: none;
+}
+
+.rating {
+    background: url(./full_n.png) repeat-x top left;
+    position: relative;
+    z-index: 2;
+    top: 4px; 
+    height: 32px; 
+    width:0px;
+}
+
+.rating-bg {
+    background: url(./epy_n.png) repeat-x top left;
+    position: relative;
+    z-index: 1;
+    top: -28px; 
+    height: 32px; 
+    width: 160px;
+}
+
+
+.ie8 .star-rating input,
+.ie8 .star-rating label.rb
+ {
+    display: inline-block;
+}
+
+.ie8 .rating,
+.ie8 .rating-bg,
+.ie8 .star-rating label.star {
+    display: none;
+}
+
+
+img {
+display:inline;
+}
+.line{
+	-webkit-box-shadow: inset 0px 0px 5px 0.03px rgba(255,255,255,1);
+-moz-box-shadow: inset 0px 0px 5px 0.03px rgba(255,255,255,1);
+box-shadow: inset 0px 0px 5px 0.03px rgba(255,255,255,1);
+-webkit-box-shadow: 0px 0px 5px 0.03px rgba(255,255,255,1);
+-moz-box-shadow: 0px 0px 5px 0.03px rgba(255,255,255,1);
+box-shadow: 0px 0px 5px 0.03px rgba(255,255,255,1);
+}
+
+.input_box
+{
+	padding: 12px; 
+	border: 1px solid #fff; 
+	background-color: rgba(0,0,0,0);
+	font-size: 15px;
+	width:206px;
+	color:white;
+
+-webkit-box-shadow: 0px 0px 5px 1px rgba(255,255,255,1);
+-moz-box-shadow: 0px 0px 5px 1px rgba(255,255,255,1);
+box-shadow: 0px 0px 5px 1px rgba(255,255,255,1);
+} 
+.texi-input:focus 
+{
+	outline-color:#000;
+}
+.button
+{
+	background-color:rgba(0,0,0,0);
+	border:2px solid white;
+	display:inline-block;
+	cursor:pointer;
+	color:#fff;
+	font-size:24px;
+	padding:auto;
+	text-decoration:none;
+	-moz-border-radius:19px;
+	-webkit-border-radius:19px;
+	border-radius:19px;
+  /* height: 31px;*/
+	width:74px;
+	float:right;
+	margin-right:15px;
+	-webkit-box-shadow: inset 0px 0px 5px 0.03px rgba(255,255,255,1);
+-moz-box-shadow: inset 0px 0px 5px 0.03px rgba(255,255,255,1);
+box-shadow: inset 0px 0px 5px 0.03px rgba(255,255,255,1);
+-webkit-box-shadow: 0px 0px 5px 0.03px rgba(255,255,255,1);
+-moz-box-shadow: 0px 0px 5px 0.03px rgba(255,255,255,1);
+box-shadow: 0px 0px 5px 0.03px rgba(255,255,255,1);
+text-shadow: 0px 0px 3px white;
+}
+.button:hover 
+{
+	border:2px solid yellow;
+	color:yellow;
+}
+.button:active 
+{
+	position:relative;top:1px;
+}
+
+html,body 
+{
+	margin:0 ; 
+	padding:0 ; 
+	width:100% ; 
+	height:100% ; 
+	overflow:auto
+} 
+
+.login_box{
+	width: 976px;
+	height: 825px;
+	background-color: #222222;
+	opacity:0.9;
+	-webkit-box-shadow: 9px 10px 13px 0px rgba(0,0,0,0.29);
+-moz-box-shadow: 9px 10px 13px 0px rgba(0,0,0,0.29);
+box-shadow: 9px 10px 13px 0px rgba(0,0,0,0.29);
+margin-top:3px;
+padding :30px 15px 30px 15px;
+}
+.game_box{
+	width: 200px;
+	height: 205px;
+	background-image: url('./game_img.jpg');
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-color: white;
+}
+.black_text_shadow{
+	text-shadow: 0px 0px 10px black;
+}
+.square-box
+{
+    position: relative;
+    width: 200px;
+    height:205px;
+    overflow: hidden;
+    background: #4679BD;
+    float:left;
+    display: inline;
+    margin-bottom:10px;
+    
+}
+.square-box:hover .square-content {
+	display: block;
+}
+
+.square-box:before
+{
+    content: "";
+    display: block;
+    padding-top: 100%;
+}
+
+.square-content
+{
+    position:  absolute;
+    height: 110px;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    color: black;
+    background-color: black;
+    
+    text-align: center;
+    display: none;
+}
+
+.square-content.fix{
+    display: block;
+}
+.movie_box{
+	float:left;
+	margin:18px;
+}
+.slider{
+  position:absolute;
+  font-size:50px;
+  color:white;
+  top:50%;
+  cursor:pointer;
+}
+</style>
+<img src="./logo.png" style="width:100px;margin-top:15px;color:white;font-size:50px;margin-left:10px;">
+<center>
+  <div id="floater" style="float:left; height:50%; margin-bottom:-440px;"></div>
+  <div id="contant" style="clear:both; height:800px; position:relative;">
+
+    <div class="login_box" style="position:relative">
+      <div class="slider next" style="right:-50px;">
+        <img src="./next.png" alt="" style="width:50%"/>
       </div>
-      <div class="modal-body">
-        <%@games.each do |game|%>
-          <%=render :partial => "page/game_select_item", :locals => {game: game} %>
+      <div class="slider prev" style="left:-50px;">
+        <img src="./prev.png" alt=""  style="width:50%"/>
+      </div>
+      <table style="margin-bottom:10px;">
+        <tr>
+          <td>
+            <img src="./open_icon.png" style="width:27px;">
+          </td>
+          <td>
+            <a class="black_text_shadow" style="color:yellow;font-size:34px;">경험한 게임을 <strong>평가</strong>해주세요!</a>
+          </td>
+          <td><img src="./close_icon.png" style="width:27px;"></td>
+        </tr>
+        </table><tr/>
+        <a style="color:white;font-size:17px;">평가해주신 게임을 분석하여 개인에게 맞는 게임을 추천해드립니다.</a><br/>
+        <hr align="center" class="line" color="white"style="display: inline-block;width:calc(100% - 44px);"><br/>
+        <%0.upto(@games.length/8) do |i|%>
+          <%if i == 0 %>
+            <div class="page" page_id="<%=i%>">
+          <%else%>
+            <div class="page" style="display:none" page_id="<%=i%>">
+            <%end%>
+              <%@games[(i*8)..((i+1)*8-1)].each do |game|%>
+                <%=render :partial => "page/game_select_item", :locals => {game: game} %>
+              <%end%>
+            </div>
         <%end%>
+
+        <div class="button_line" style="margin-right:11px;position:absolute;right:11px;bottom:15px;">
+
+          <div class="button" data-dismiss="modal" onclick="location.href='/'">OK</button>
+        </div>
       </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal" onclick="location.href='/'">Close</button>
-      </div>
-    </div><!-- /.modal-content -->
-  </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
+    </div>
+  </center>
 
 <script type="text/javascript" charset="utf-8">
+  var current_page_id = 0;
+  var last_page_id = <%=@games.length/8%>;
   $(function(){
-    $(".modal").modal("show")
+    $(".star-rating .star").on("click",function(){
+      var game_id=$(this).parents(".star-rating").attr("game_id")
+      $.ajax({
+        url: "/api/set_rating/",
+        dataType:"JSON",
+        type: "POST",
+        data: {
+          game_id:game_id,
+          score:$(this).attr("value")
+        },
+        success: function(data) {
+          $(".movie_box[game_id="+game_id+"] .square-content").addClass("fix")
+          console.log(".movie_box[game_id="+game_id+"] .square-content")
+        }
+      })
+    })
+    $(".slider.next").on("click",function(){
+      $(".page[page_id="+current_page_id+"]").hide()
+      current_page_id++
+      if(current_page_id > last_page_id){
+        current_page_id = 0
+      }
+      $(".page[page_id="+current_page_id+"]").show()
+    })
+    $(".slider.prev").on("click",function(){
+      $(".page[page_id="+current_page_id+"]").hide()
+      current_page_id--
+      if(current_page_id < 0){
+        current_page_id = last_page_id
+      }
+      $(".page[page_id="+current_page_id+"]").show()
+    })
   })
   
 </script>

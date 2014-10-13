@@ -18,33 +18,59 @@ Platform.create(name:"XBOX ONE")
 Platform.create(name:"PSP")
 Platform.create(name:"3DS")
 
-Genre.create(name:"인디")
-Genre.create(name:"어드벤처")
-Genre.create(name:"공포")
 Genre.create(name:"액션")
-Genre.create(name:"롤플레잉")
-Genre.create(name:"코미디")
+Genre.create(name:"스포츠")
+Genre.create(name:"TPS")
+Genre.create(name:"어드벤처")
+Genre.create(name:"FPS")
+Genre.create(name:"레이싱")
+Genre.create(name:"RPG")
+Genre.create(name:"액션")
+Genre.create(name:"기능성게임")
+Genre.create(name:"리듬액션")
+Genre.create(name:"슈팅")
+Genre.create(name:"전략시뮬레이션")
+Genre.create(name:"소셜게임")
+Genre.create(name:"퍼즐")
+Genre.create(name:"아케이드")
+Genre.create(name:"MMORPG")
+Genre.create(name:"캐주얼게임")
+Genre.create(name:"TGC")
 
-
-
-doc = File.open("#{Rails.root}/seed/PC-independent.tsv").readlines
+doc = File.open("#{Rails.root}/seed/data1.tsv").readlines
 counter = 0
 doc.each do |line|
   counter+=1
   column = line.split("\t")
   seed = Hash.new
   seed[:genre] = column[0]
-  seed[:name] = column[1]
-  seed[:maker] = column[2]
-  seed[:distribute] = column[3]
-  seed[:date] = column[4]
-  seed[:user_class] = column[5]
-  seed[:content] = column[9]
-  seed[:movie] = column[6]
-  seed[:platform] = column[7]
-  seed[:small_image] = "independent/#{counter+1}-1.jpg"
-  seed[:big_image] = "independent/#{counter+1}-2.jpg"
-  seed[:image] = column[7]
+  seed[:platform] = column[1]
+  seed[:name] = column[2]
+  seed[:maker] = column[3]
+  seed[:distribute] = column[4]
+  seed[:date] = column[5]
+  seed[:user_class] = column[6]
+  seed[:content] = column[7]
+  seed[:movie] = column[8]
+  seed[:small_image] = column[9]
+  seed[:big_image] = column[10]
+  seed[:stat0] = column[12]
+  seed[:stat1] = column[13]
+  seed[:stat2] = column[14]
+  seed[:stat3] = column[15]
+  seed[:stat4] = column[16]
+
+  if !seed[:stat3].nil? and seed[:stat3].include?("\n")
+    seed[:stat3].slice!("\n")
+  end
+  if !seed[:stat4].nil? and seed[:stat4].include?("\n")
+    seed[:stat4].slice!("\n")
+  end
+
+  if seed[:stat4].nil? or seed[:stat4] == "" 
+    seed[:stat4] = (rand(3)+2).to_s
+  end
+  puts seed.inspect
 
   Game.data_from_seed seed
 end

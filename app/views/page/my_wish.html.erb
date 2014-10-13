@@ -1,8 +1,323 @@
-<h1>찜한 게임</h1>
-<%@wishes.each do |wish|%>
-  <%=render :partial => "page/game_item", :locals => {game: wish.game} %>
-<%end%>
-<h1>평가한 게임</h1>
-<%@ratings.each do |rating|%>
-  <%=render :partial => "page/game_item", :locals => {game: rating.game} %>
-<%end%>
+<style type="text/css">
+.star_div {
+   margin-left:20px;
+   margin-top:10px;
+   height:50px;
+}
+
+.star-rating {
+    margin: 0 auto;
+    display:inline-block;
+    margin-right:10px;
+}
+
+.rb0:checked ~ .rating,
+label.rb0l:hover ~ .rating
+{
+    width: 0px; 
+} 
+
+.rb1:checked ~ .rating,
+label.rb1l:hover ~ .rating
+{
+    width: 16px; 
+} 
+
+.rb2:checked ~ .rating,
+label.rb2l:hover ~ .rating
+{
+    width: 32px; 
+} 
+
+.rb3:checked ~ .rating,
+label.rb3l:hover ~ .rating
+{
+    width: 48px; 
+}
+
+.rb4:checked ~ .rating,
+label.rb4l:hover ~ .rating
+{
+    width: 64px; 
+}
+.rb5:checked ~ .rating,
+label.rb5l:hover ~ .rating
+{
+    width: 80px;
+}
+.rb6:checked ~ .rating,
+label.rb6l:hover ~ .rating
+{
+    width: 96px;
+}
+.rb7:checked ~ .rating,
+label.rb7l:hover ~ .rating
+{
+    width: 112px;
+}
+.rb8:checked ~ .rating,
+label.rb8l:hover ~ .rating
+{
+    width: 128px;
+}
+.rb9:checked ~ .rating,
+label.rb9l:hover ~ .rating
+{
+    width: 144px;
+}
+.rb10:checked ~ .rating,
+label.rb10l:hover ~ .rating
+{
+    width: 160px; /* 5 stars */
+}
+
+.star-rating label.star {
+    width: 16px; 
+    left: -16px; 
+    padding: 0;
+    height: 40px; 
+    position: relative;
+    z-index: 3;
+    float: left;
+}
+
+.star-rating label.star.last {
+    width: 32px;
+}
+
+
+.star-rating input[type=radio],
+.star-rating label.rb
+{
+    display: none;
+}
+
+.rating {
+    background: url(./full_n.png) repeat-x top left;
+    position: relative;
+    z-index: 2;
+    top: 4px; 
+    height: 32px; 
+    width:0px;
+}
+
+.rating-bg {
+    background: url(./epy_n.png) repeat-x top left;
+    position: relative;
+    z-index: 1;
+    top: -28px; 
+    height: 32px; 
+    width: 160px;
+}
+
+
+.ie8 .star-rating input,
+.ie8 .star-rating label.rb
+ {
+    display: inline-block;
+}
+
+.ie8 .rating,
+.ie8 .rating-bg,
+.ie8 .star-rating label.star {
+    display: none;
+}
+
+
+
+img {
+display:inline;
+}
+.line{
+	-webkit-box-shadow: inset 0px 0px 5px 0.03px rgba(255,255,255,1);
+-moz-box-shadow: inset 0px 0px 5px 0.03px rgba(255,255,255,1);
+box-shadow: inset 0px 0px 5px 0.03px rgba(255,255,255,1);
+-webkit-box-shadow: 0px 0px 5px 0.03px rgba(255,255,255,1);
+-moz-box-shadow: 0px 0px 5px 0.03px rgba(255,255,255,1);
+box-shadow: 0px 0px 5px 0.03px rgba(255,255,255,1);
+}
+
+.input_box
+{
+	padding: 12px; 
+	border: 1px solid #fff; 
+	background-color: rgba(0,0,0,0);
+	font-size: 15px;
+	width:206px;
+	color:white;
+
+-webkit-box-shadow: 0px 0px 5px 1px rgba(255,255,255,1);
+-moz-box-shadow: 0px 0px 5px 1px rgba(255,255,255,1);
+box-shadow: 0px 0px 5px 1px rgba(255,255,255,1);
+} 
+.texi-input:focus 
+{
+	outline-color:#000;
+}
+.button
+{
+	background-color:rgba(0,0,0,0);
+	border:2px solid white;
+	display:inline-block;
+	cursor:pointer;
+	color:#fff;
+	font-size:24px;
+	padding:auto;
+	text-decoration:none;
+	-moz-border-radius:19px;
+	-webkit-border-radius:19px;
+	border-radius:19px;
+  /* height: 31px;*/
+	width:74px;
+	float:right;
+	margin-right:15px;
+	-webkit-box-shadow: inset 0px 0px 5px 0.03px rgba(255,255,255,1);
+-moz-box-shadow: inset 0px 0px 5px 0.03px rgba(255,255,255,1);
+box-shadow: inset 0px 0px 5px 0.03px rgba(255,255,255,1);
+-webkit-box-shadow: 0px 0px 5px 0.03px rgba(255,255,255,1);
+-moz-box-shadow: 0px 0px 5px 0.03px rgba(255,255,255,1);
+box-shadow: 0px 0px 5px 0.03px rgba(255,255,255,1);
+text-shadow: 0px 0px 3px white;
+}
+.button:hover 
+{
+	border:2px solid yellow;
+	color:yellow;
+}
+.button:active 
+{
+	position:relative;top:1px;
+}
+
+html,body 
+{
+	margin:0 ; 
+	padding:0 ; 
+	width:100% ; 
+	height:100% ; 
+	overflow:auto
+} 
+
+.login_box{
+	width: 100%;
+	height: 600px;
+	opacity:0.9;
+	-webkit-box-shadow: 9px 10px 13px 0px rgba(0,0,0,0.29);
+-moz-box-shadow: 9px 10px 13px 0px rgba(0,0,0,0.29);
+box-shadow: 9px 10px 13px 0px rgba(0,0,0,0.29);
+margin-top:3px;
+padding :30px 15px 30px 15px;
+}
+.game_box{
+	width: 200px;
+	height: 205px;
+	background-image: url('./game_img.jpg');
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-color: white;
+}
+.black_text_shadow{
+	text-shadow: 0px 0px 10px black;
+}
+.square-box
+{
+    position: relative;
+    width: 200px;
+    height:205px;
+    overflow: hidden;
+    background: #4679BD;
+    float:left;
+    display: inline;
+    margin-bottom:10px;
+    
+}
+.square-box:hover .square-content {
+	display: block;
+}
+
+.square-box:before
+{
+    content: "";
+    display: block;
+    padding-top: 100%;
+}
+
+.square-content
+{
+    position:  absolute;
+    height: 110px;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    color: black;
+    background-color: black;
+    
+    text-align: center;
+    display: none;
+}
+
+.square-content.fix{
+    display: block;
+}
+.movie_box{
+	float:left;
+	margin:18px;
+}
+.slider{
+  position:absolute;
+  font-size:50px;
+  color:white;
+  top:50%;
+  cursor:pointer;
+}
+.title{
+  margin-left:32px;
+}
+.title .name{
+  color:white;
+  font-size:24px;
+  float:left;
+}
+.title .line{
+  border-bottom:3px solid white;
+  float:right;
+  margin-top:20px;
+  width:77%;
+  margin-right:100px;
+}
+</style>
+
+<div style="text-align:center;">
+  <img src="./picbox.png" alt="" style="width:350px;"/>
+</div>
+<div class="title">
+  <div class="name">내가 픽한 게임</div>
+  <div class="line"></div>
+</div>
+<center>
+  <div id="floater" style="float:left; height:50%; margin-bottom:-440px;"></div>
+  <div id="contant" style="clear:both; position:relative;">
+    <div class="login_box" style="position:relative">
+      <%@wishes.each do |wish|%>
+        <%=render :partial => "page/game_item", :locals => {game: wish.game, opt: "wish"} %>
+      <%end%>
+    </div>
+  </div>
+</center>
+<div class="title">
+  <div class="name">내가 평가한 게임</div>
+  <div class="line"></div>
+</div>
+
+<center>
+  <div id="floater" style="float:left; height:50%; margin-bottom:-440px;"></div>
+  <div id="contant" style="clear:both; position:relative;">
+    <div class="login_box" style="position:relative">
+      <%@ratings.each do |rating|%>
+        <%=render :partial => "page/game_item", :locals => {game: rating.game, opt: "rating"} %>
+      <%end%>
+    </div>
+  </div>
+</center>
+
+<%=render :partial => "page/game_info_modal"%>
